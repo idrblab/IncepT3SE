@@ -1,2 +1,2 @@
 # IncepT3SE
-Type III Secreted Effector Identification with Deep Inception Architecture and Rationally Designed Dataset
+Type III secreted effector (T3SE) identification with deep inception architecture and rationally designed dataset.
