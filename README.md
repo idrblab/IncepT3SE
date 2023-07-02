@@ -4,6 +4,22 @@
 Type III secreted effector (T3SE) identification with deep inception architecture and rationally designed dataset.
 
 
+```Python
+
+import os
+model_list = [i for i in os.listdir('./saved_model') if 'h5' in i]
+
+clf1 = T3SEClassEstimator(n_outputs=2, fmap_shape1=(200, 20, 1), dense_layers=[256, 32],
+                           gpuid=0, batch_size=128, lr=1e-4, decay=1e-3, loss=loss_fun)
+loss_fun = focal_loss(gamma=[1, 1], alpha=0.5)
+for saved_model_name in model_list:
+    clf1._model = tf.keras.models.load_model('./saved_model/'+saved_model_name, custom_objects={'focal_loss_fixed':loss_fun})
+    proba1 = clf1._model.predict(testX_d_onehot[:,:200,:,:])
+    pre_dual = np.round(proba1)    
+    print(saved_model_name, sum(pre_dual[:]))
+
+```
+
 
 <img src="https://github.com/nongchao-er/IncepT3SE/blob/main/plt_fig/Figure1.png" width="100%">
 
