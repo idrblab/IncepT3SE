@@ -5,10 +5,24 @@ Type III secreted effector (T3SE) identification with deep inception architectur
 
 
 ```Python
+###  part of the codes in the main program
+
+alpha = len(X_pos_onehot)/(len(X_pos_onehot)+len(X_nag_onehot)*1)  # modulate the imbalance of pos/nag = 1:1
+loss_fun = focal_loss(gamma=[2, 2], alpha=alpha)
+clf = T3SEClassEstimator(n_outputs=2, fmap_shape1=(200, 20, 1), dense_layers=[256, 32], epochs=8000, monitor='val_auc', metric='ACC',
+                          gpuid=0, batch_size=128, lr=1e-4, decay=1e-3, loss=loss_fun)  # train at least 20 Epochs
+clf.patience = 21  # no less than 20
+clf.fit(trainX_onehot[:,:200,:,:], trainY, (testX_d_onehot[:,:200,:,:], testX_d_onehot[:,:200,:,:]), (testY_d, testY_d))
+print('Best epochs: %.2f, Best loss: %.2f' % (clf._performance.best_epoch, clf._performance.best))
+
+import time
+
+curr_time = (time.strftime("%m-%d-%H%M",time.localtime()))
+clf._model.save('./saved_model/'+curr_time+'.h5')
 
 import os
-model_list = [i for i in os.listdir('./saved_model') if 'h5' in i]
 
+model_list = [i for i in os.listdir('./saved_model') if 'h5' in i]
 clf1 = T3SEClassEstimator(n_outputs=2, fmap_shape1=(200, 20, 1), dense_layers=[256, 32],
                            gpuid=0, batch_size=128, lr=1e-4, decay=1e-3, loss=loss_fun)
 loss_fun = focal_loss(gamma=[1, 1], alpha=0.5)
