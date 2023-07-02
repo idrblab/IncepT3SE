@@ -1,5 +1,5 @@
 # IncepT3SE
-`License: MIT `  `TensorFlow 2.0`  `Paper: under submission`  `DOI: waiting`
+`License: MIT `  `TensorFlow 2.0`  `Paper: under submission`  `DOI: waiting assigned`
 
 Type III secreted effector (T3SE) identification with deep inception architecture and rationally designed dataset.
 
