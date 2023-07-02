@@ -39,7 +39,7 @@ for saved_model_name in model_list:
 
 **Figure 1.** The negative dataset in this studied consisted of non-T3SEs from several bacterial species, including *L. pneumophila*, *L. longbeachae*, *L. drancourtii*, *C. burnetii*, *R. grylli* & *E. coli*. (A) The proportion of each species in the dataset was no more than 20%, with *E. coli* being one of the most abundant at 19.8%. (B) The two-dimensional scatter plot distribution of non-T3SE from multi-bacterial species. All sequences were encoded through their composition, transition, and distribution (CTD) features and then visualized using t-SNE algorithm. Employing the non-T3SEs of all 6 species took up more protein space (on the right side of the plot) than only using that of *E. coli* (on the left side).
 
-<img src="https://github.com/nongchao-er/IncepT3SE/blob/main/plt_fig/Figure.png" width="100%">
+<img src="https://github.com/nongchao-er/IncepT3SE/blob/main/plt_fig/Figure2.png" width="100%">
 
 **Figure 2.** The workflow and architecture of the IncepT3SE model adopted in this study. This model directly takes sequence of protein amino acids as input. After sequence one-hot encoding, the input tensors expand into 3 parallel streams. Each stream undergoes a convolutional layer that performs 1024 convolutions, followed by max pool dimension reduction and batch normalization. Two key inception layers are then concatenated by 3 convolutional layers of different kernel size, followed by another max pool layer. After global max pooling, the tensors are squeezed into one flatten vector of 576 dimensions. Through 3 fully connected layer combined with random dropout and batch normalization, the probability of T3SE is finally predicted.
 
