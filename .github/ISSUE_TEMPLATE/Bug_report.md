@@ -1,6 +1,7 @@
----
-name: Bug report
----
+
+## name
+- bug report
+
 
 ## Bug Description
 - Please describe the bugs
